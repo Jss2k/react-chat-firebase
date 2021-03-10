@@ -4,11 +4,11 @@ export const AppWrapper = styled.div`
   width: 100%;
   height: 100vh;
   display: grid;
-  grid-template-rows: 6rem auto;
+  grid-template-rows: 8rem auto;
 `
 
 export const Main = styled.div`
-  background: blue;
+  background: #15456f;
   display: grid;
   grid-template-columns: 32rem auto;
 `
