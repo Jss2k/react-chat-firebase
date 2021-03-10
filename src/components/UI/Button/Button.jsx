@@ -1,4 +1,4 @@
-import { StyledButton } from './Signin.styles'
+import { StyledButton } from './Button.styles'
 
 const Button = ({ children, ...otherProps }) => {
   return (
