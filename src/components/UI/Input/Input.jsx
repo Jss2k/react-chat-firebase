@@ -1,4 +1,4 @@
-import { StyledInput } from './Signin.styles'
+import { StyledInput } from './Input.styles'
 
 const Input = ({ handleChange, label, ...otherProps }) => {
   return (
