@@ -56,8 +56,6 @@ export const UserImage = styled.div`
     object-fit: cover;
     object-position: center;
   }
-
-
 `
 
 export const HeaderLogo = styled.div`

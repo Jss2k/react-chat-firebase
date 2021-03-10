@@ -8,7 +8,7 @@ export const AppWrapper = styled.div`
 `
 
 export const Main = styled.div`
-  background: blue;
+  background: #15456f;
   display: grid;
   grid-template-columns: 32rem auto;
 `

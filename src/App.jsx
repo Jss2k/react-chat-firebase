@@ -1,4 +1,6 @@
+import { useEffect, useState } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { firestore } from './firebase/utils'
 // import { useAuthState } from 'react-firebase-hooks/auth'
 // import { auth } from './firebase/utils'
 
@@ -11,19 +13,35 @@ import Sidebar from './components/Sidebar/Sidebar'
 import { AppWrapper, Main } from './App.styles.js'
 
 const App = () => {
+  const [rooms, setRooms] = useState([])
   // const [user] = useAuthState(auth)
   // console.log(user)
+  const getChannels = () => {
+    firestore.collection('rooms').onSnapshot((snapshot) => {
+      setRooms(snapshot.docs.map((doc) => {
+        return {
+          id: doc.id,
+          name: doc.data().name
+        }
+      }))
+    })
+  }
+
+  useEffect(() => {
+    getChannels()
+  }, [])
+
   return (
     <AppWrapper>
       <Router>
         <Header />
         <Main>
-          <Sidebar />
+          <Sidebar rooms={rooms} />
           <Switch>
-            <Route path='/room'>
+            <Route exact path='/'>
               <ChatRoom />
             </Route>
-            <Route path='/'>
+            <Route path='/login'>
               <LoginPage />
             </Route>
           </Switch>

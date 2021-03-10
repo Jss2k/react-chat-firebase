@@ -1,3 +1,4 @@
+import { firestore } from './../../firebase/utils'
 
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline'
 import AddIcon from '@material-ui/icons/Add'
@@ -13,7 +14,18 @@ import {
   Channel
 } from './Sidebar.styles'
 
-const Sidebar = () => {
+const Sidebar = (props) => {
+
+  const addChannel = () => {
+    const promptName = prompt('Enter channel name')
+    if(promptName) {
+      firestore.collection('rooms').add({
+        name: promptName
+      })
+    }
+  }
+
+
   return (
     <StyledSidebar>
       <WorkspaceContainer>
@@ -29,18 +41,19 @@ const Sidebar = () => {
           <div>
             Channels
           </div>
-          <AddIcon fontSize='large' />
+          <AddIcon
+            fontSize='large'
+            onClick={addChannel}
+          />
         </NewChannelContainer>
         <ChannelList>
-          <Channel>
-            <span># sdasdad</span>
-          </Channel>
-          <Channel>
-          <span># sdasdad</span>
-          </Channel>
-          <Channel>
-          <span># sdasdad</span>
-          </Channel>
+          {
+            props.rooms.map(item => (
+              <Channel key={item.id}>
+                <span># {item.name}</span>
+              </Channel>
+            ))
+          }
         </ChannelList>
       </ChannelsContainer>
     </StyledSidebar>
