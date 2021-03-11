@@ -6,19 +6,19 @@ import {
   MessageText
 } from './ChatMessage.styles'
 
-const ChatMessage = () => {
+const ChatMessage = ({ text, name, image, timestamp }) => {
   return (
     <ChatMessageContainer>
       <UserAvatar>
-        <img src='https://randomuser.me/api/portraits/men/90.jpg' alt='User' />
+        <img src={image} alt='User pic' />
       </UserAvatar>
       <MessageContent>
         <UserName>
-          Jesus Christ
-          <span>dd/mm/yy</span>
+          {name}
+          <span>{new Date(timestamp.toDate()).toUTCString()}</span>
         </UserName>
         <MessageText>
-          sada asdaad ad aa a ad ad ad dadasadd
+          {text}
         </MessageText>
       </MessageContent>
     </ChatMessageContainer>

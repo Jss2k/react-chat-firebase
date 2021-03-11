@@ -50,8 +50,11 @@ const App = () => {
                 <Main>
                   <Sidebar rooms={rooms} />
                   <Switch>
-                    <Route exact path='/room'>
-                      <ChatRoom />
+                    <Route path='/room/:channelId'>
+                      <ChatRoom user={user} />
+                    </Route>
+                    <Route path='/'>
+                      Select or Create Channel
                     </Route>
                   </Switch>
                 </Main>

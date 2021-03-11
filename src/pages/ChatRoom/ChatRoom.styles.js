@@ -3,6 +3,7 @@ import styled from 'styled-components'
 export const ChatRoomWrapper = styled.main`
   display: grid;
   grid-template-rows: 7rem auto min-content;
+  min-height: 0;
 `
 
 export const HeaderChat = styled.div`
@@ -15,7 +16,9 @@ export const HeaderChat = styled.div`
 `
 
 export const MessageContainer = styled.div`
-
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
 `
 
 export const ChannelName = styled.div`
