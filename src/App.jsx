@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import { firestore } from './firebase/utils'
+import { auth, firestore } from './firebase/utils'
 // import { useAuthState } from 'react-firebase-hooks/auth'
 // import { auth } from './firebase/utils'
 
@@ -10,10 +10,11 @@ import Header from './components/Header/Header'
 import Sidebar from './components/Sidebar/Sidebar'
 
 
-import { AppWrapper, Main } from './App.styles.js'
+import { AppWrapper, Main, Container } from './App.styles.js'
 
 const App = () => {
   const [rooms, setRooms] = useState([])
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')))
   // const [user] = useAuthState(auth)
   // console.log(user)
   const getChannels = () => {
@@ -27,6 +28,13 @@ const App = () => {
     })
   }
 
+  const signOut = () => {
+    auth.signOut().then(() => {
+      localStorage.removeItem('user')
+      setUser(null)
+    })
+  }
+
   useEffect(() => {
     getChannels()
   }, [])
@@ -34,20 +42,22 @@ const App = () => {
   return (
     <AppWrapper>
       <Router>
-        <Header />
-        <Main>
-          <Sidebar rooms={rooms} />
-          <Switch>
-            <Route exact path='/'>
-              <ChatRoom />
-            </Route>
-            <Route path='/login'>
-              <LoginPage />
-            </Route>
-          </Switch>
-        </Main>
+        {
+          !user
+          ? <LoginPage setUser={setUser}/>
+          : <Container>
+              <Header signOut={signOut} user={user}/>
+                <Main>
+                  <Sidebar rooms={rooms} />
+                  <Switch>
+                    <Route exact path='/room'>
+                      <ChatRoom />
+                    </Route>
+                  </Switch>
+                </Main>
+              </Container>
+                }
       </Router>
-      {/* <div>{user ? <ChatRoom /> : <LoginPage />}</div> */}
     </AppWrapper>
   )
 }

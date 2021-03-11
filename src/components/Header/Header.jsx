@@ -2,6 +2,7 @@ import HelpOutlineIcon from '@material-ui/icons/HelpOutline'
 import Input from '../UI/Input/Input'
 
 import TextLogo from './../../assets/text-logo.png'
+import UserImg from './../../assets/user-img.jpg'
 
 import {
   StyledHeader,
@@ -13,7 +14,7 @@ import {
   HeaderLogo
 } from './Header.styles'
 
-const Header = () => {
+const Header = ({ user, signOut }) => {
   return (
     <StyledHeader>
       <Main>
@@ -30,10 +31,10 @@ const Header = () => {
       </Main>
       <UserContainer>
         <UserName>
-          mr.Jesus
+          {user.name}
         </UserName>
-        <UserImage>
-          <img src='https://picsum.photos/200/300' alt='User' />
+        <UserImage onClick={signOut} >
+          <img src={user.photo ? user.photo : {UserImg}} alt='User pic' />
         </UserImage>
       </UserContainer>
     </StyledHeader>
