@@ -27,7 +27,7 @@ export const InputContainer = styled.div`
   }
 `
 
-export const SendButton = styled.div`
+export const SendButton = styled.button`
   background: #0b0c21;
   border-radius: 2px;
   width: 3rem;
@@ -36,6 +36,8 @@ export const SendButton = styled.div`
   align-items: center;
   justify-content: center;
   margin-right: 0.5rem;
+  border: none;
+  outline: none;
   cursor: pointer;
 
   &:hover {
