@@ -2,12 +2,12 @@ import styled from 'styled-components'
 
 export const StyledSidebar = styled.aside`
   background: #0b0c21;
-  box-shadow: 0 1px 0 0 rgba(255 255 255 / 10%);
+  display: grid;
+  grid-template-rows: 7rem auto;
 `
 
 export const WorkspaceContainer = styled.div`
   color: white;
-  height: 7rem;
   display: flex;
   align-items: center;
   font-size: 2rem;

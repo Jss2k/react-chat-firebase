@@ -1,8 +1,13 @@
 // import { auth, GoogleProvider } from './../../firebase/utils'
 
 // import Button from '../../components/UI/Button/Button'
+import Logo from './../../assets/logo.png'
 
-import { LoginPageWrapper } from './LoginPage.styles'
+import {
+  LoginPageWrapper,
+  Contant,
+  LogoImg
+} from './LoginPage.styles'
 
 const LoginPage = () => {
   return (
@@ -12,7 +17,9 @@ const LoginPage = () => {
           auth.signInWithPopup(GoogleProvider)
         }}
       /> */}
-      login
+      <Contant>
+        <LogoImg src={Logo} alt='logo image' />
+      </Contant>
     </LoginPageWrapper>
   )
 }
