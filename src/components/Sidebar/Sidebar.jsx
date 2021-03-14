@@ -1,18 +1,16 @@
 import { useHistory } from 'react-router-dom'
 import { firestore } from './../../firebase/utils'
 
-import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline'
-import AddIcon from '@material-ui/icons/Add'
+import User from './../User/User'
 
 import {
   StyledSidebar,
   WorkspaceContainer,
-  Name,
-  NewMessage,
   ChannelsContainer,
   NewChannelContainer,
   ChannelList,
-  Channel
+  Channel,
+  AddIconStyled
 } from './Sidebar.styles'
 
 const Sidebar = (props) => {
@@ -38,19 +36,14 @@ const Sidebar = (props) => {
   return (
     <StyledSidebar>
       <WorkspaceContainer>
-        <Name>
-          Garbage collection
-        </Name>
-        <NewMessage>
-          <AddCircleOutlineIcon fontSize='large' />
-        </NewMessage>
+        <User signOut={props.signOut} user={props.user} />
       </WorkspaceContainer>
       <ChannelsContainer>
         <NewChannelContainer>
           <div>
             Channels
           </div>
-          <AddIcon
+          <AddIconStyled
             fontSize='large'
             onClick={addChannel}
           />

@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { useParams } from 'react-router-dom'
 import { firestore } from './../../firebase/utils'
-import firebase from 'firebase'
+import firebase from 'firebase/app'
 
 import ChatMessage from '../../components/ChatMessage/ChatMessage'
 import ChatInput from './../../components/ChatInput/ChatInput'
@@ -19,6 +19,8 @@ const ChatRoom = ({ user }) => {
   let { channelId } = useParams()
   const [channel, setChannel] = useState()
   const [messages, setMessages] = useState([])
+  const [position, setPosition] = useState(JSON.parse(localStorage.getItem('currentChannel')))
+  const messagesRef = useRef(null)
 
   const getMessages = () => {
     firestore.collection('rooms')
@@ -32,6 +34,7 @@ const ChatRoom = ({ user }) => {
   }
 
   const sendMessage = (text) => {
+    
     if (channelId) {
       let payload = {
         text: text,
@@ -57,7 +60,29 @@ const ChatRoom = ({ user }) => {
   useEffect(() => {
     getChannel()
     getMessages()
+    
   }, [channelId])
+
+  useEffect(() => {
+    if (!channel) return
+    setPosition(JSON.parse(localStorage.getItem(`${channel.name}`)))
+    localStorage.setItem('currentChannel', JSON.stringify(`${channel.name}`))
+  }, [channel])
+
+  useEffect(() => {
+    messagesRef.current.scrollTo(0, position)
+  })
+
+  useEffect(() => {
+    if ((messagesRef.current.clientHeight + position) === messagesRef.current.scrollHeight) {
+      setPosition(99999)
+     }
+  }, [messages, position])
+
+  const lastPosition = () => {
+    localStorage.setItem(`${channel.name}`, JSON.stringify(messagesRef.current.scrollTop))
+    setPosition(JSON.parse(localStorage.getItem(`${channel.name}`)))
+  }
 
   return (
     <ChatRoomWrapper>
@@ -69,20 +94,38 @@ const ChatRoom = ({ user }) => {
           assdasad asd asd asa
         </ChannelInfo>
       </HeaderChat>
-      <MessageContainer>
+      <MessageContainer ref={messagesRef} onScroll={lastPosition}>
         {
           messages.length > 0 &&
-          messages.map((data, index) => (
-            <ChatMessage 
+          messages.map((data, index) => {
+
+            // if (data.timestamp !== data.timestamp) {
+            //   return (<div>
+            //   <hr />
+            // <ChatMessage
+            //   key={index}
+            //   text={data.text}
+            //   name={data.user}
+            //   image={data.userImage}
+            //   timestamp={data.timestamp}
+            // />
+            //   </div>)
+            // }
+            // return console.log(new Date(data.timestamp.toDate()).toDateString())
+            return (
+            <ChatMessage
+              key={index}
               text={data.text}
               name={data.user}
               image={data.userImage}
               timestamp={data.timestamp}
             />
-          ))
+          )
+        
+          })
         }
       </MessageContainer>
-      <ChatInput sendMessage={sendMessage} />
+      <ChatInput sendMessage={sendMessage}/>
     </ChatRoomWrapper>
   )
 }

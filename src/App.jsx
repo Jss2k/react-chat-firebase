@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { auth, firestore } from './firebase/utils'
-// import { useAuthState } from 'react-firebase-hooks/auth'
-// import { auth } from './firebase/utils'
 
 import ChatRoom from './pages/ChatRoom/ChatRoom'
 import LoginPage from './pages/LoginPage/LoginPage'
@@ -15,8 +13,7 @@ import { AppWrapper, Main, Container } from './App.styles.js'
 const App = () => {
   const [rooms, setRooms] = useState([])
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')))
-  // const [user] = useAuthState(auth)
-  // console.log(user)
+
   const getChannels = () => {
     firestore.collection('rooms').onSnapshot((snapshot) => {
       setRooms(snapshot.docs.map((doc) => {
@@ -46,9 +43,9 @@ const App = () => {
           !user
           ? <LoginPage setUser={setUser}/>
           : <Container>
-              <Header signOut={signOut} user={user}/>
+              <Header />
                 <Main>
-                  <Sidebar rooms={rooms} />
+                  <Sidebar rooms={rooms} signOut={signOut} user={user}/>
                   <Switch>
                     <Route path='/room/:channelId'>
                       <ChatRoom user={user} />
