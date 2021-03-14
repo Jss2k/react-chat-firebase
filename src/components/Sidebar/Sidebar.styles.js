@@ -61,3 +61,53 @@ export const Channel = styled.div`
 export const AddIconStyled = styled(AddIcon)`
   cursor: pointer;
 `
+
+export const ModalContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  min-width: 30rem;
+  min-height: 30rem;
+
+h2 {
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+
+  input {
+    flex: 1;
+    border: none;
+    font-size: 1.5rem;
+    background: white;
+    margin: 1rem 0;
+  }
+
+  input:focus {
+    outline: none;
+  }
+
+  label {
+    font-size: 1.3rem;
+  }
+
+  button {
+    width: 100%;
+    height: 4rem;
+    margin: 1rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    color: black;
+    text-transform: uppercase;
+  }
+`

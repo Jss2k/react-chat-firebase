@@ -1,7 +1,9 @@
+import { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { firestore } from './../../firebase/utils'
 
 import User from './../User/User'
+import Modal from './../Modal/Modal'
 
 import {
   StyledSidebar,
@@ -10,12 +12,18 @@ import {
   NewChannelContainer,
   ChannelList,
   Channel,
-  AddIconStyled
+  AddIconStyled,
+  ModalContent
 } from './Sidebar.styles'
+import Input from '../UI/Input/Input'
+import Button from '../UI/Button/Button'
 
 const Sidebar = (props) => {
 
   const history = useHistory()
+  const [isOpenModal, setOpenModal] = useState(false)
+  const [name, setName] = useState('')
+  const [description, setDescription] = useState('')
 
   const goToChannel = (id) => {
     if (id) {
@@ -23,15 +31,13 @@ const Sidebar = (props) => {
     }
   }
 
-  const addChannel = () => {
-    const promptName = prompt('Enter channel name')
-    if(promptName) {
+  const addChannel = (e) => {
+    e.preventDefault()
       firestore.collection('rooms').add({
-        name: promptName
+        name: name,
+        description: description
       })
-    }
   }
-
 
   return (
     <StyledSidebar>
@@ -45,7 +51,7 @@ const Sidebar = (props) => {
           </div>
           <AddIconStyled
             fontSize='large'
-            onClick={addChannel}
+            onClick={() => setOpenModal(true)}
           />
         </NewChannelContainer>
         <ChannelList>
@@ -61,6 +67,35 @@ const Sidebar = (props) => {
           }
         </ChannelList>
       </ChannelsContainer>
+      <Modal isOpenModal={isOpenModal} close={() => setOpenModal(false)}>
+        <ModalContent>
+          <h2>create a new channel</h2>
+            <form>
+              <Input 
+                type='text'
+                label='Channel name(max length - 20)'
+                maxLength='20'
+                onChange={(e) => setName(e.target.value)}
+                value={name}
+                placeholder='Message here...'
+              />
+              <Input 
+                type='text'
+                label='Description(max length - 50)'
+                maxLength='50'
+                onChange={(e) => setDescription(e.target.value)}
+                value={description}
+                placeholder='Message here...'
+              />
+              <Button
+                type='submit'
+                onClick={addChannel}
+              >
+                create channel
+              </Button>
+            </form>
+        </ModalContent>
+      </Modal>
     </StyledSidebar>
   )
 }
