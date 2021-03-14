@@ -98,20 +98,6 @@ const ChatRoom = ({ user }) => {
         {
           messages.length > 0 &&
           messages.map((data, index) => {
-
-            // if (data.timestamp !== data.timestamp) {
-            //   return (<div>
-            //   <hr />
-            // <ChatMessage
-            //   key={index}
-            //   text={data.text}
-            //   name={data.user}
-            //   image={data.userImage}
-            //   timestamp={data.timestamp}
-            // />
-            //   </div>)
-            // }
-            // return console.log(new Date(data.timestamp.toDate()).toDateString())
             return (
             <ChatMessage
               key={index}

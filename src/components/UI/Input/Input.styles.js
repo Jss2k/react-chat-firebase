@@ -3,6 +3,7 @@ import styled from 'styled-components'
 export const StyledInput = styled.div`
   display: flex;
   align-items: center;
+  flex-direction: column;
 
   input {
     width: 100%;
@@ -10,13 +11,10 @@ export const StyledInput = styled.div`
     font-weight: 400;
     font-size: 16px;
     letter-spacing: 1px;
-    border-color: #55abee;
     padding: 10px 20px;
-    border: none;
-    border-radius: 20px;
     outline: none;
     box-sizing: border-box;
-    border: 2px solid rgb(0, 0, 0, 0.2);
+    border-radius: 4px;
   }
 
   label {
