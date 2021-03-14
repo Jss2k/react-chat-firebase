@@ -26,39 +26,6 @@ export const SearchContainer = styled.div`
   width: 90%;
 `
 
-export const UserContainer = styled.div`
-  flex: 0 0 25%;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-`
-
-export const UserName = styled.div`
-
-`
-
-export const UserImage = styled.div`
-  height: 6rem;
-  width: 6rem;
-  overflow: hidden;
-  border: 2px solid rgba(255,255,255,0.4);
-  border-radius: 50%;
-  transition: linear 0.25s;
-  cursor: pointer; 
-
-  &:hover {
-    transition: ease-out 0.2s;
-    border: 2px solid rgba(255,255,255,0.8);
-  }
-
-  img {
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-    object-position: center;
-  }
-`
-
 export const HeaderLogo = styled.div`
   height: 100%;
 

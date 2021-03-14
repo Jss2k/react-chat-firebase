@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import AddIcon from '@material-ui/icons/Add'
 
 export const StyledSidebar = styled.aside`
   background: #0b0c21;
@@ -55,4 +56,8 @@ export const Channel = styled.div`
     margin-left: 3rem;
     line-height: 3rem;
   }
+`
+
+export const AddIconStyled = styled(AddIcon)`
+  cursor: pointer;
 `

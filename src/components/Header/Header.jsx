@@ -2,19 +2,15 @@ import HelpOutlineIcon from '@material-ui/icons/HelpOutline'
 import Input from '../UI/Input/Input'
 
 import TextLogo from './../../assets/text-logo.png'
-import UserImg from './../../assets/user-img.jpg'
 
 import {
   StyledHeader,
   Main,
   SearchContainer,
-  UserContainer,
-  UserName,
-  UserImage,
   HeaderLogo
 } from './Header.styles'
 
-const Header = ({ user, signOut }) => {
+const Header = () => {
   return (
     <StyledHeader>
       <Main>
@@ -29,14 +25,6 @@ const Header = ({ user, signOut }) => {
         </SearchContainer>
         <HelpOutlineIcon fontSize='large'/>
       </Main>
-      <UserContainer>
-        <UserName>
-          {user.name}
-        </UserName>
-        <UserImage onClick={signOut} >
-          <img src={user.photo ? user.photo : {UserImg}} alt='User pic' />
-        </UserImage>
-      </UserContainer>
     </StyledHeader>
   )
 }
